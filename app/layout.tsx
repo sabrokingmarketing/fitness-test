@@ -9,6 +9,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { Reveal } from "@/components/reveal";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { site } from "@/content/site";
 import { siteUrl } from "@/lib/url";
 
@@ -77,6 +78,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Footer />
         <WhatsAppButton />
         <Reveal />
+        <ScrollToTop />
       </body>
     </html>
   );
