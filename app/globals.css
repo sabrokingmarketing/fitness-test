@@ -1,0 +1,353 @@
+@import "tailwindcss";
+
+/* ============================================================
+   FitForm design system
+   Brand colours come from content/site.ts (set on <html> in
+   app/layout.tsx as --c-primary, --c-secondary, --c-accent).
+   Every other colour below is derived from those three.
+   ============================================================ */
+
+:root {
+  --c-primary: #f97316;
+  --c-secondary: #171717;
+  --c-accent: #f3f4f6;
+
+  /* primary (orange) */
+  --primary: var(--c-primary);
+  --primary-hover: color-mix(in oklab, var(--c-primary) 86%, black);
+  --primary-soft: color-mix(in oklab, var(--c-primary) 16%, white);
+  --primary-tint: color-mix(in oklab, var(--c-primary) 8%, white);
+  /* orange that is dark enough to use as text on white (WCAG AA) */
+  --primary-text: color-mix(in oklab, var(--c-primary) 62%, black);
+  --on-primary: var(--c-secondary);
+
+  /* secondary (charcoal) */
+  --ink: var(--c-secondary);
+  --ink-soft: color-mix(in oklab, var(--c-secondary) 80%, white);
+  --ink-muted: color-mix(in oklab, var(--c-secondary) 72%, white);
+  --ink-hover: color-mix(in oklab, var(--c-secondary) 84%, white);
+  --on-ink: #ffffff;
+  --on-ink-muted: color-mix(in oklab, white 72%, var(--c-secondary));
+
+  /* accent (soft grey) and surfaces */
+  --ground: #ffffff;
+  --surface: var(--c-accent);
+  --surface-strong: color-mix(in oklab, var(--c-accent) 88%, var(--c-secondary));
+  --border: color-mix(in oklab, var(--c-accent) 70%, var(--c-secondary));
+
+  /* the one motif: a forward lean. Every photo, button and shape shares this slant. */
+  --lean: 0.32; /* horizontal offset per unit of height */
+  --cut: 14px; /* slant on small things like buttons */
+
+  /* motion tokens (Jakub Krehel first, Emil Kowalski second) */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-press: 120ms;
+  --t-hover: 180ms;
+  --t-enter: 640ms;
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --header-h: 72px;
+}
+
+@theme inline {
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-tint: var(--primary-tint);
+  --color-primary-text: var(--primary-text);
+  --color-on-primary: var(--on-primary);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-ink-hover: var(--ink-hover);
+  --color-on-ink: var(--on-ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-surface-strong: var(--surface-strong);
+  --color-border: var(--border);
+
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+  /* five type steps */
+  --text-display: clamp(2.75rem, 6.4vw, 6.25rem);
+  --text-display--line-height: 0.98;
+  --text-display--letter-spacing: -0.035em;
+  --text-title: clamp(2rem, 4vw, 3.75rem);
+  --text-title--line-height: 1.04;
+  --text-title--letter-spacing: -0.03em;
+  --text-statement: clamp(1.5rem, 2.5vw, 2.25rem);
+  --text-statement--line-height: 1.28;
+  --text-statement--letter-spacing: -0.015em;
+  --text-lead: 1.1875rem;
+  --text-lead--line-height: 1.6;
+  --text-body: 1.0625rem;
+  --text-body--line-height: 1.6;
+
+  --breakpoint-xs: 30rem;
+}
+
+@layer base {
+/* ---------- base ---------- */
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 16px);
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+body {
+  background: var(--ground);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+h1, h2, h3 { text-wrap: balance; font-weight: 700; }
+p { text-wrap: pretty; }
+::selection { background: var(--primary); color: var(--on-primary); }
+
+:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 3px;
+}
+.on-dark :focus-visible { outline-color: var(--primary); }
+
+.wrap {
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.skip-link {
+  position: absolute; left: 16px; top: -100px; z-index: 100;
+  background: var(--ink); color: var(--on-ink); padding: 12px 18px; font-weight: 600;
+}
+.skip-link:focus { top: 12px; }
+
+}
+
+@layer components {
+/* ---------- the motif ---------- */
+/* Photos and panels lean forward: the right edge slants back at the bottom. */
+.lean {
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--lean-x, 18%)) 100%, 0 100%);
+}
+.lean-left {
+  clip-path: polygon(var(--lean-x, 18%) 0, 100% 0, 100% 100%, 0 100%);
+}
+.lean-both {
+  clip-path: polygon(var(--lean-x, 12%) 0, 100% 0, calc(100% - var(--lean-x, 12%)) 100%, 0 100%);
+}
+.lean-sm { --lean-x: 0.32em; }
+
+/* ---------- buttons: one shape, cut at the motif's slant ---------- */
+.btn {
+  --btn-bg: var(--primary);
+  --btn-bg-hover: var(--primary-hover);
+  --btn-fg: var(--on-primary);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 52px;
+  padding: 0 calc(1.6rem + var(--cut)) 0 1.6rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: var(--btn-fg);
+  background: var(--btn-bg);
+  clip-path: polygon(0 0, 100% 0, calc(100% - var(--cut)) 100%, 0 100%);
+  transition: transform var(--t-press) var(--ease-out), background-color var(--t-hover) ease, color var(--t-hover) ease;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:focus-visible {
+  outline: none;
+  box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--btn-bg);
+}
+.btn-dark { --btn-bg: var(--ink); --btn-bg-hover: var(--ink-hover); --btn-fg: var(--on-ink); }
+.btn-dark:focus-visible { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary); }
+.btn-light { --btn-bg: var(--surface); --btn-bg-hover: var(--surface-strong); --btn-fg: var(--ink); }
+.btn-white { --btn-bg: #fff; --btn-bg-hover: var(--surface); --btn-fg: var(--ink); }
+.btn:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { background: var(--btn-bg-hover); }
+  .btn .btn-arrow { transition: transform var(--t-hover) var(--ease-out); }
+  .btn:hover .btn-arrow { transform: translateX(3px); }
+}
+.btn-sm { min-height: 44px; font-size: 0.9375rem; padding: 0 calc(1.15rem + var(--cut)) 0 1.15rem; }
+
+.link {
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in oklab, currentColor 35%, transparent);
+  transition: text-decoration-color var(--t-hover) ease;
+}
+@media (hover: hover) and (pointer: fine) {
+  .link:hover { text-decoration-color: currentColor; }
+}
+
+/* ---------- motion layer ---------- */
+/* Content is only hidden when JavaScript is running (html.js), so nothing
+   disappears if scripts fail. Reduced-motion visitors always see the
+   finished state. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] > * {
+    opacity: 0;
+    transform: translateY(22px);
+    filter: blur(4px);
+    transition:
+      opacity var(--t-enter) var(--ease-out),
+      transform var(--t-enter) var(--ease-out),
+      filter var(--t-enter) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 75ms);
+  }
+  .js [data-reveal].is-in > * {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+
+  /* hero: words rise in on load */
+  .hero-rise > * {
+    animation: rise 760ms var(--ease-out) both;
+    animation-delay: calc(120ms + var(--i, 0) * 80ms);
+  }
+
+  /* signature move: the hero photo opens like a shutter, along the lean */
+  .js .shutter {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    animation: shutter 1100ms var(--ease-in-out) 260ms forwards;
+  }
+  .js .shutter img {
+    transform: scale(1.12);
+    animation: settle 1600ms var(--ease-soft) 260ms forwards;
+  }
+
+  /* the giant orange shape slides in once */
+  .shape-in {
+    animation: shape-in 1000ms var(--ease-out) both;
+  }
+
+  /* one moving picture: the hero shape drifts as the page scrolls */
+  @supports (animation-timeline: scroll()) {
+    .drift {
+      animation: drift linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0 100vh;
+    }
+  }
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(18px); filter: blur(4px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes shutter {
+  to { clip-path: polygon(0 0, 100% 0, calc(100% - var(--lean-x, 18%)) 100%, 0 100%); }
+}
+@keyframes settle {
+  to { transform: none; }
+}
+@keyframes shape-in {
+  from { opacity: 0; transform: translateX(6%); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes drift {
+  to { transform: translateY(-8%); }
+}
+
+/* ---------- FAQ accordion ---------- */
+.faq summary { list-style: none; cursor: pointer; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .plus { position: relative; width: 18px; height: 18px; flex: none; }
+.faq .plus::before,
+.faq .plus::after {
+  content: "";
+  position: absolute; left: 0; top: 50%;
+  width: 18px; height: 3px; margin-top: -1.5px;
+  background: currentColor;
+  transition: transform 220ms var(--ease-out);
+}
+.faq .plus::after { transform: rotate(90deg); }
+.faq details[open] .plus::after { transform: rotate(0deg); }
+.faq details { transition: background-color 220ms ease, color 220ms ease; }
+@media (prefers-reduced-motion: no-preference) {
+  @supports (interpolate-size: allow-keywords) {
+    .faq details { interpolate-size: allow-keywords; }
+    .faq details::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 320ms var(--ease-out), content-visibility 320ms allow-discrete;
+    }
+    .faq details[open]::details-content { block-size: auto; }
+  }
+}
+
+/* ---------- form fields ---------- */
+.field {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 16px;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: #fff;
+  border: 2px solid transparent;
+  transition: border-color var(--t-hover) ease;
+}
+select.field {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' fill='none'%3E%3Cpath d='M1 1.5l6 6 6-6' stroke='%23171717' stroke-width='2.2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
+}
+.field:focus { outline: none; border-color: var(--ink); }
+.field[aria-invalid="true"] { border-color: #b42318; }
+
+/* keyboard focus ring on the finder choices (clip-path hides normal outlines) */
+.peer:focus-visible + .chip-focus { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary); }
+
+/* ---------- small helpers ---------- */
+.img-zoom img { transition: transform 700ms var(--ease-soft); }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .img-zoom:hover img { transform: scale(1.035); }
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* ---------- motion: menu, finder, diagram ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .mobile-menu:not([hidden]) li,
+  .mobile-menu:not([hidden]) .btn {
+    animation: rise 420ms var(--ease-out) both;
+    animation-delay: calc(var(--i, 5) * 40ms);
+  }
+  .finder-result { animation: swap 280ms var(--ease-out) both; }
+  .js [data-reveal] .diagram .dg {
+    opacity: 0;
+    transform: translateX(-10px);
+    transform-box: fill-box;
+    transition: opacity 500ms var(--ease-out), transform 700ms var(--ease-out);
+    transition-delay: calc(var(--d, 0) * 900ms + 150ms);
+  }
+  .js [data-reveal].is-in .diagram .dg { opacity: 1; transform: none; }
+}
+@keyframes swap {
+  from { opacity: 0; filter: blur(4px); transform: translateY(6px); }
+  to { opacity: 1; filter: none; transform: none; }
+}
+
+}
