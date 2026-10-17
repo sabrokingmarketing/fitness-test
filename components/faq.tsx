@@ -22,12 +22,12 @@ export function Faq() {
         </div>
         <div data-reveal className="faq flex flex-col gap-2 lg:col-span-8">
           {site.faqs.map((f, i) => (
-            <details key={f.q} name="faq" open={i === 0} className="group bg-surface open:bg-primary">
+            <details key={f.q} name="faq" open={i === 0} className="group bg-surface open:bg-primary open:text-on-primary">
               <summary className="flex min-h-[72px] items-center justify-between gap-6 px-6 py-4 text-[1.15rem] leading-snug font-semibold sm:text-[1.25rem]">
                 <span>{f.q}</span>
                 <span className="plus" aria-hidden="true" />
               </summary>
-              <p className="max-w-[56ch] px-6 pb-7 text-[1.0625rem] text-on-primary">{f.a}</p>
+              <p className="max-w-[56ch] px-6 pb-7 text-[1.0625rem]">{f.a}</p>
             </details>
           ))}
         </div>

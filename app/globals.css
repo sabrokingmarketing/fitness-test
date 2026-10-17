@@ -8,18 +8,21 @@
    ============================================================ */
 
 :root {
-  --c-primary: #f97316;
+  --c-primary: #2563eb;
+  --c-on-primary: #ffffff;
   --c-secondary: #171717;
   --c-accent: #f3f4f6;
 
-  /* primary (orange) */
+  /* primary (brand blue) */
   --primary: var(--c-primary);
-  --primary-hover: color-mix(in oklab, var(--c-primary) 86%, black);
-  --primary-soft: color-mix(in oklab, var(--c-primary) 16%, white);
-  --primary-tint: color-mix(in oklab, var(--c-primary) 8%, white);
-  /* orange that is dark enough to use as text on white (WCAG AA) */
-  --primary-text: color-mix(in oklab, var(--c-primary) 62%, black);
-  --on-primary: var(--c-secondary);
+  --primary-hover: color-mix(in oklab, var(--c-primary) 84%, black);
+  --primary-soft: color-mix(in oklab, var(--c-primary) 14%, white);
+  --primary-tint: color-mix(in oklab, var(--c-primary) 7%, white);
+  /* brand colour dark enough to use as text on white (WCAG AA) */
+  --primary-text: color-mix(in oklab, var(--c-primary) 85%, black);
+  /* brand colour light enough to use as text on charcoal (WCAG AA) */
+  --primary-on-dark: color-mix(in oklab, var(--c-primary) 55%, white);
+  --on-primary: var(--c-on-primary);
 
   /* secondary (charcoal) */
   --ink: var(--c-secondary);
@@ -58,6 +61,7 @@
   --color-primary-tint: var(--primary-tint);
   --color-primary-text: var(--primary-text);
   --color-on-primary: var(--on-primary);
+  --color-primary-on-dark: var(--primary-on-dark);
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
@@ -117,7 +121,7 @@ p { text-wrap: pretty; }
   outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
-.on-dark :focus-visible { outline-color: var(--primary); }
+.on-dark :focus-visible { outline-color: var(--primary-on-dark); }
 
 .wrap {
   width: 100%;
@@ -176,7 +180,7 @@ p { text-wrap: pretty; }
   box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--ink), inset 0 0 0 5px var(--btn-bg);
 }
 .btn-dark { --btn-bg: var(--ink); --btn-bg-hover: var(--ink-hover); --btn-fg: var(--on-ink); }
-.btn-dark:focus-visible { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary); }
+.btn-dark:focus-visible { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary-on-dark); }
 .btn-light { --btn-bg: var(--surface); --btn-bg-hover: var(--surface-strong); --btn-fg: var(--ink); }
 .btn-white { --btn-bg: #fff; --btn-bg-hover: var(--surface); --btn-fg: var(--ink); }
 .btn:active { transform: scale(0.97); }
@@ -236,7 +240,7 @@ p { text-wrap: pretty; }
     animation: settle 1600ms var(--ease-soft) 260ms forwards;
   }
 
-  /* the giant orange shape slides in once */
+  /* the giant brand-colour shape slides in once */
   .shape-in {
     animation: shape-in 1000ms var(--ease-out) both;
   }
@@ -319,7 +323,7 @@ select.field {
 .field[aria-invalid="true"] { border-color: #b42318; }
 
 /* keyboard focus ring on the finder choices (clip-path hides normal outlines) */
-.peer:focus-visible + .chip-focus { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary); }
+.peer:focus-visible + .chip-focus { box-shadow: /* taste-skill-ignore: keyboard focus ring */ inset 0 0 0 3px var(--primary-on-dark); }
 
 /* ---------- small helpers ---------- */
 .img-zoom img { transition: transform 700ms var(--ease-soft); }

@@ -86,7 +86,7 @@ export function EnquiryForm({ tone = "dark" }: { tone?: "dark" | "light" }) {
 
   const dark = tone === "dark";
   const label = `block text-[0.95rem] font-medium ${dark ? "text-on-ink" : "text-ink"}`;
-  const err = `mt-1.5 text-[0.9rem] font-medium ${dark ? "text-primary" : "text-[#b42318]"}`;
+  const err = `mt-1.5 text-[0.9rem] font-medium ${dark ? "text-primary-on-dark" : "text-[#b42318]"}`;
 
   const field = (k: keyof Values, text: string, input: React.ReactNode, full = false) => (
     <div className={full ? "sm:col-span-2" : ""}>

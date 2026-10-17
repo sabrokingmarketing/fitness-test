@@ -1,7 +1,7 @@
 import { site } from "@/content/site";
 
 /* A diagram drawn only with the brand's leaning shape: scattered at first (where you are now),
-   pulled into one focused band (your plan), then set out in neat orange rows (steady progress). */
+   pulled into one focused band (your plan), then set out in neat brand-colour rows (steady progress). */
 
 type Shape = { u: number; v: number; tone: "pale" | "mid" | "ink" | "accent" };
 

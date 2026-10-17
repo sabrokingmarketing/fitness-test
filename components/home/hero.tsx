@@ -6,7 +6,7 @@ import { speakHref } from "@/lib/contact";
 import { site } from "@/content/site";
 
 /**
- * Hero: the brand's forward-leaning shape at giant scale in orange, cropped by the
+ * Hero: the brand's forward-leaning shape at giant scale in the brand colour, cropped by the
  * edge of the screen, with the best photo cut to the same lean.
  */
 export function Hero() {
@@ -43,7 +43,7 @@ export function Hero() {
         </div>
 
         <div className="relative lg:col-span-5 lg:self-stretch">
-          {/* phone: orange block behind the photo */}
+          {/* phone: brand-colour block behind the photo */}
           <div aria-hidden="true" className="lean-left absolute inset-x-[-16px] top-[22%] bottom-0 bg-primary lg:hidden" style={{ ["--lean-x" as string]: "18%" }} />
           <div className="relative flex h-full items-center justify-end pb-0 lg:pb-0">
             <div

@@ -59,6 +59,7 @@ function LocalBusinessSchema() {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const brand = {
     "--c-primary": site.colours.primary,
+    "--c-on-primary": site.colours.onPrimary,
     "--c-secondary": site.colours.secondary,
     "--c-accent": site.colours.accent,
   } as React.CSSProperties;

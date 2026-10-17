@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { images, type ImageKey } from "@/lib/images";
 
-/** Top of inner pages: big title on white, photo cut to the lean on an orange block. */
+/** Top of inner pages: big title on white, photo cut to the lean on a brand-colour block. */
 export function PageIntro({
   title,
   text,

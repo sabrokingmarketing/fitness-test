@@ -27,7 +27,8 @@ export const site = {
 
   // Brand colours. Change these and the whole site updates (see app/globals.css).
   colours: {
-    primary: "#F97316", // energetic orange: buttons and key highlights
+    primary: "#2563EB", // modern blue: buttons and key highlights
+    onPrimary: "#FFFFFF", // text on top of the brand colour (white keeps blue readable)
     secondary: "#171717", // charcoal black: headings and text
     accent: "#F3F4F6", // soft grey: calm background panels
   },
